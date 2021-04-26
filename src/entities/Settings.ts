@@ -10,14 +10,16 @@ class Setting {
 
 	@Column() chat: boolean;
 
-	@UpdateDateColumn() updated_at: Date;
+	@UpdateDateColumn({ name: 'updated_at' })
+	updatedAt: Date;
 
-	@CreateDateColumn() created_at: Date;
+	@CreateDateColumn({ name: 'created_at' })
+	createdAt: Date;
 
-  constructor(){
-    if(!this.id){
-      this.id = uuid();
-    }
-  }
+	constructor() {
+		if (!this.id) {
+			this.id = uuid();
+		}
+	}
 }
 export { Setting };

@@ -6,10 +6,14 @@ const messagesController = new MessagesController();
 
 const controllers = {
 	users: UsersController.create,
-	settings: SettingsController.create,
-	messages:{
+	settings: {
+		create: SettingsController.create,
+		findByUsername: SettingsController.findByUsername,
+		updateChat: SettingsController.updateChat
+	},
+	messages: {
 		create: messagesController.create,
-		showByUser:messagesController.showByUser
+		showByUser: messagesController.showByUser
 	}
 };
 

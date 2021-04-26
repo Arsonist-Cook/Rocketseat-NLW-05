@@ -1,19 +1,15 @@
 import { Request, Response } from 'express';
 import { MessagesService } from '../services/MessagesService';
 
-
-
 class MessagesController {
-	//private messageService = new MessagesService();
-
 	async create(request: Request, response: Response) {
 		const messageService = new MessagesService();
-		const { admin_id, text, user_id } = request.body;
+		const { adminId, text, userId } = request.body;
 
 		const message = await messageService.create({
-			admin_id,
+			adminId,
 			text,
-			user_id
+			userId
 		});
 
 		return response.json(message);

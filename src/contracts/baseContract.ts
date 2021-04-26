@@ -1,2 +1,0 @@
-const ID = '_id';
-

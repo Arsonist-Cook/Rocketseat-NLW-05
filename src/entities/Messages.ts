@@ -10,12 +10,17 @@ class Message {
 	@JoinColumn({ name: 'user_id' })
 	@ManyToOne(() => User)
 	user: User;
+	
+	@Column({ name: 'user_id' })
+	userId: string;
 
-	@Column() user_id: string;
+	@Column({ name: 'admin_id' })
+	adminId: string;
 
-	@Column() admin_id: string;
 	@Column() text: string;
-	@CreateDateColumn() created_at: Date;
+
+	@CreateDateColumn({ name: 'created_at' })
+	createdAt: Date;
 
 	constructor() {
 		if (!this.id) {

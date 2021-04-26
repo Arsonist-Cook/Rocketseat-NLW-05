@@ -3,9 +3,9 @@ import { Message } from '../entities/Messages';
 import { MessagesRepository } from '../repositories/MessagesRepository';
 
 interface IMessageCreate {
-	admin_id?: string;
+	adminId?: string;
 	text: string;
-	user_id: string;
+	userId: string;
 }
 
 class MessagesService {
@@ -15,11 +15,11 @@ class MessagesService {
 		this.messageRepository = getCustomRepository(MessagesRepository);
 	}
 
-	async create({ admin_id, text, user_id }: IMessageCreate) {
+	async create({ adminId, text, userId }: IMessageCreate) {
 		const message = this.messageRepository.create({
-			admin_id,
+			adminId,
 			text,
-			user_id
+			userId
 		});
 
 		await this.messageRepository.save(message);
@@ -27,9 +27,9 @@ class MessagesService {
 		return message;
 	}
 
-	async listByUser(user_id: string) {
+	async listByUser(userId: string) {
 		const list = await this.messageRepository.find({
-			where: { user_id },
+			where: { userId },
 			relations: [ 'user' ]
 		});
 
