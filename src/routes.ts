@@ -22,6 +22,11 @@ routes.get('/pages/client', (request, response) => {
 	return response.render('html/client.html');
 });
 
+
+routes.get('/pages/admin', (request, response) => {
+	return response.render('html/admin.html');
+});
+
 routes.post('/', (request, response) => {
 	return response.json({
 		message: 'Usuário salvo com sucesso!'

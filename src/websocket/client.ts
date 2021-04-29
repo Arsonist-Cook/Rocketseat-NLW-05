@@ -44,9 +44,31 @@ io.on('connect', (socket) => {
 				socketId
 			});
 		}
-		messagesService.create({
+		await messagesService.create({
 			userId,
 			text
 		}); //saves the chat messages
+
+		const allMessages = await messagesService.listByUser(userId); //Receives all user messages
+		socket.emit('client_list_all_messages', allMessages);
+
+		const allUsers = await connectionsService.findAllConnectionsWithoutAdmin();
+		io.emit('admin_list_all_users', allUsers);
+	});
+
+	socket.on('client_send_to_admin', async ({ text, socketAdminId }) => {
+		const socketId = socket.id;
+		
+		const { userId } = await connectionsService.findBySocketId(socketId);
+
+		const message = await messagesService.create({
+			text,
+			userId
+		});
+
+		io.to(socketAdminId).emit('admin_receive_message', {
+			message,
+			socketId
+		});
 	});
 });
